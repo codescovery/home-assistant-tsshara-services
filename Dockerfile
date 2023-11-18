@@ -10,16 +10,14 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/TsShara.Services/Application/TsShara.Services.Application/TsShara.Services.Application.csproj", "Application/TsShara.Services.Application/"]
-COPY ["./src/TsShara.Services/Domain/TsShara.Services.Domain/TsShara.Services.Domain.csproj", "Domain/TsShara.Services.Domain/"]
-RUN dotnet restore "./src/TsShara.Services/Application/TsShara.Services.Application/./TsShara.Services.Application.csproj"
-COPY . .
-WORKDIR "/src/Application/TsShara.Services.Application"
-RUN dotnet build "./TsShara.Services.Application.csproj" -c $BUILD_CONFIGURATION -o /app/build
+COPY src/ .
+WORKDIR /src/TsShara.Services/Application/TsShara.Services.Application
+RUN dotnet restore TsShara.Services.Application.csproj
+RUN dotnet build TsShara.Services.Application.csproj -c "$BUILD_CONFIGURATION"  -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./TsShara.Services.Application.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish TsShara.Services.Application.csproj -c "$BUILD_CONFIGURATION" -o /app/publish /p:UseAppHost=false
 
 
 
@@ -28,12 +26,10 @@ FROM base-addon AS final
 ENV ASPNETCORE_URLS=http://+:80;http://+:443
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV DOTNET_RUNNING_IN_CONTAINER=true
-
+WORKDIR /app
 COPY run.sh  .
 RUN chmod a+x run.sh
 EXPOSE 80
 EXPOSE 443
-WORKDIR /app
 COPY --from=publish /app/publish .
-
-ENTRYPOINT ["dotnet", "TsShara.Services.Application.dll"]
+CMD ["/app/run.sh"]
