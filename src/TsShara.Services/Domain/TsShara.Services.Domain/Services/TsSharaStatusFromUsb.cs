@@ -87,16 +87,25 @@ public class TsSharaStatusFromUsb : ITsSharaStatusFromUsb
 
     private async Task<ITsSharaSerialPortInformation?> FindTsSharaPort(CancellationToken cancellationToken, List<SerialPortInfo> availableSerialUsbPorts)
     {
+        _logger.LogDebug("Trying to find ts-shara compatible device info in {count} ports", availableSerialUsbPorts.Count);
+        _logger.LogDebug("Ports: {name}", string.Join(",", availableSerialUsbPorts.Select(c => c.PortName)));
         foreach (var availableSerialUsbPort in availableSerialUsbPorts)
         {
+            _logger.LogDebug("Trying to find ts-shara compatible device info in {name}", availableSerialUsbPort.PortName);
             var port = CreateSerialPort(availableSerialUsbPort.PortName);
             OpenConnectionIfClosed(port);
+            _logger.LogDebug("Port {name} opened: {opened}", availableSerialUsbPort.PortName, port.IsOpen);
             var deviceInfo = await ReadDeviceInfoAsync(port, cancellationToken);
-            if (IsTsharaDeviceInfoMessage(deviceInfo)) return new TsSharaSerialPortInformation(port, deviceInfo!);
+            if (IsTsharaDeviceInfoMessage(deviceInfo))
+            {
+                _logger.LogDebug("Device info found for {name}", availableSerialUsbPort);
+                return new TsSharaSerialPortInformation(port, deviceInfo!);
+            }
 
-            _logger.LogDebug("No device info found for {name}", availableSerialUsbPort);
+            _logger.LogDebug("No device info found for {name}, closing connection", availableSerialUsbPort.PortName);
             port.Close();
             port.Dispose();
+            _logger.LogDebug("Port {name} closed: {closed}", availableSerialUsbPort.PortName, !port.IsOpen);
         }
 
         _logger.LogWarning("No ts-shara compatible device info found in the following ports: {name}",
@@ -129,14 +138,19 @@ public class TsSharaStatusFromUsb : ITsSharaStatusFromUsb
             port.Write(_settings.Value.TsShara.Commands.GetDeviceInformation.Command);
             await Task.Delay(delay, cancellationToken);
             var deviceInfo = port.ReadExisting();
-            if(string.IsNullOrWhiteSpace(deviceInfo)) return null;
-            var rawData = _tsSharaInformationDataService.Create(deviceInfo,port,deviceInfo);
+            if (string.IsNullOrWhiteSpace(deviceInfo)) return null;
+            var rawData = _tsSharaInformationDataService.Create(deviceInfo, port, deviceInfo);
             return rawData;
 
         }
+        catch (TimeoutException e)
+        {
+            _logger.LogError(e, "Timeout reading device info");
+            throw;
+        }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            _logger.LogError(e, "Error reading device info");
             throw;
         }
 

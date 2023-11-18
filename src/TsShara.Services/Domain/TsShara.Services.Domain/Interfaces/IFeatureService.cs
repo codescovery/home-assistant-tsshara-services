@@ -2,6 +2,7 @@
 
 public interface IFeatureService
 {
+    IEnabledFeaturesService EnabledFeaturesService { get; }
     Task StartNotifiersAsync(CancellationToken cancellationToken);
     Task StartConsoleMonitoringAsync(CancellationToken cancellationToken);
     Task StopNotifiersAsync(CancellationToken cancellationToken);

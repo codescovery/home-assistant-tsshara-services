@@ -1,6 +1,8 @@
-namespace TsShara.Services.Application.Services;
+using TsShara.Services.Domain.Interfaces;
 
-public class EnabledFeaturesService
+namespace TsShara.Services.Domain.Services;
+
+internal class EnabledFeaturesService:IEnabledFeaturesService
 {
     public const string FeatureApi = "feature-api";
     public const string FeatureConsoleMonitoring = "feature-console-monitoring";
@@ -11,7 +13,7 @@ public class EnabledFeaturesService
     {
         _args = args;
     }
-    public bool IsFeatureApiEnabled => IsEnabled(FeatureApi) && !IsFeatureConsoleMonitoringEnabled;
+    public bool IsFeatureApiEnabled =>!_args.Any() || (IsEnabled(FeatureApi) && !IsFeatureConsoleMonitoringEnabled);
     public bool IsFeatureConsoleMonitoringEnabled => IsEnabled(FeatureConsoleMonitoring) && !IsFeatureApiEnabled;
 
     public bool IsFeatureNotifierEnabled =>

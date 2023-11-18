@@ -19,4 +19,21 @@
     <ProjectReference Include="..\..\Domain\TsShara.Services.Domain\TsShara.Services.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Services\**" />
+    <Compile Remove="Controllers\FeatureController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Services\**" />
+  </ItemGroup>
+
 </Project>

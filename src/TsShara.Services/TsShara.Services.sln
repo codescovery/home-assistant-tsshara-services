@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TsShara.Services.Domain", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsShara.Services.Application", "Application\TsShara.Services.Application\TsShara.Services.Application.csproj", "{05F84693-2FAF-43B2-8160-EB0FEFC9DB29}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51B5D44F-05CD-4196-9008-A503CC2D7F67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "home-assistant", "home-assistant", "{0405DCEF-C73E-4548-8F9F-33BB98087EB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4C08567A-4E87-4394-8124-5D6836036C90} = {A6C20A89-9C0E-45E0-AF4C-0DF9947E6C99}
 		{05F84693-2FAF-43B2-8160-EB0FEFC9DB29} = {3616A324-3A0A-4BF4-9592-D68E8E0B6E03}
+		{0405DCEF-C73E-4548-8F9F-33BB98087EB0} = {51B5D44F-05CD-4196-9008-A503CC2D7F67}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3A28F7A-59C2-4426-80B9-58E405792D11}

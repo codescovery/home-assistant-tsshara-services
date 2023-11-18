@@ -17,14 +17,17 @@ namespace TsShara.Services.Domain.Services
         private readonly IOptions<AppSettings> _settings;
         private readonly HttpClient _httpClient;
         private readonly ITimeSpanService _timeSpanService;
+        private readonly IEnabledFeaturesService _enabledFeaturesService;
+        
         public BackgroundServiceStatus Status { get; private set; }
-        public NotifierService(ILogger<NotifierService> logger, IOptions<AppSettings> settings, ITsSharaStatusFromUsb serialUsbReader, HttpClient httpClient, ITimeSpanService timeSpanService)
+        public NotifierService(ILogger<NotifierService> logger, IOptions<AppSettings> settings, ITsSharaStatusFromUsb serialUsbReader, HttpClient httpClient, ITimeSpanService timeSpanService, IEnabledFeaturesService enabledFeaturesService)
         {
             _logger = logger;
             _settings = settings;
             _serialUsbReader = serialUsbReader;
             _httpClient = httpClient;
             _timeSpanService = timeSpanService;
+            _enabledFeaturesService = enabledFeaturesService;
             Status = BackgroundServiceStatus.Created;
         }
         public override Task StopAsync(CancellationToken cancellationToken)
@@ -37,7 +40,7 @@ namespace TsShara.Services.Domain.Services
             _logger.LogInformation("NotifierService running at: {time}", DateTimeOffset.Now);
             Status = BackgroundServiceStatus.Running;
             var delay = _timeSpanService.ToTimeSpan(_settings.Value.Notifier.Interval);
-            while (!stoppingToken.IsCancellationRequested && _settings.Value.Notifier.Enabled)
+            while (!stoppingToken.IsCancellationRequested && _enabledFeaturesService.IsFeatureNotifierEnabled)
             {
                 try
                 {
@@ -61,7 +64,7 @@ namespace TsShara.Services.Domain.Services
                 return;
             }
             
-            if (!_settings.Value.Notifier.Enabled) return;
+            if (!_enabledFeaturesService.IsFeatureNotifierEnabled) return;
                 
             if(data.IsType<ITsSharaInformationError>())
                 await NotifyAsync(data.AsError()!, cancellationToken);

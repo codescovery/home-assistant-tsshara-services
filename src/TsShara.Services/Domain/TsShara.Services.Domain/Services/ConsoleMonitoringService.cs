@@ -15,13 +15,15 @@ internal class ConsoleMonitoringService : BackgroundService, IBackgroundServiceS
     private readonly ITsSharaStatusFromUsb _serialUsbReader;
     private readonly IOptions<AppSettings> _settings;
     private readonly ITimeSpanService _timeSpanService;
+    private readonly IEnabledFeaturesService _enabledFeaturesService;
     public BackgroundServiceStatus Status { get; private set; }
-    public ConsoleMonitoringService(ILogger<ConsoleMonitoringService> logger, IOptions<AppSettings> settings, ITsSharaStatusFromUsb serialUsbReader, ITimeSpanService timeSpanService)
+    public ConsoleMonitoringService(ILogger<ConsoleMonitoringService> logger, IOptions<AppSettings> settings, ITsSharaStatusFromUsb serialUsbReader, ITimeSpanService timeSpanService, IEnabledFeaturesService enabledFeaturesService)
     {
         _logger = logger;
         _settings = settings;
         _serialUsbReader = serialUsbReader;
         _timeSpanService = timeSpanService;
+        _enabledFeaturesService = enabledFeaturesService;
         Status = BackgroundServiceStatus.Created;
     }
 
@@ -36,7 +38,7 @@ internal class ConsoleMonitoringService : BackgroundService, IBackgroundServiceS
         _logger.LogInformation("Console Monitoring running at: {time}", DateTimeOffset.Now);
         Status = BackgroundServiceStatus.Running;
         var delay = _timeSpanService.ToTimeSpan(_settings.Value.Notifier.Interval);
-        while (!stoppingToken.IsCancellationRequested && _settings.Value.ConsoleMonitoring.Enabled)
+        while (!stoppingToken.IsCancellationRequested && _enabledFeaturesService.IsFeatureConsoleMonitoringEnabled)
         {
             try
             {
