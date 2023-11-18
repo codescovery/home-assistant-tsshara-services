@@ -55,101 +55,81 @@ map:
   - ssl:rw
 journald: true
 options:
-  log_level: list(Trace|Debug|Information|Warning|Error|Critical)?
-  notifier:
-    internal: 
-      days: null
-      hours: null
-      minutes: null
-      seconds: 30
-      milliseconds: null
-    endpoint: null
-  serial:
-    new_line_indicator: "\r"
-    read_timeout: 
-      days: null
-      hours: null
-      minutes: null
-      seconds: null
-      milliseconds: 100
-    commands:
-      get_device_information: 
-        command: "I\r"
-        delay: 
-          days: null
-          hours: null
-          minutes: null
-          seconds: null
-          milliseconds: 1000
-      get_device_status: 
-        command: "Q1\r"
-        delay: 
-          days: null
-          hours: null
-          minutes: null
-          seconds: null
-          milliseconds: 1000
-    valid_prefixes:
-      - ?TS SHAR,
-      - TS SHARA,
-      - S SHARA,
-      - #TS SHAR,
-      - V23T405,
-      - V23T406,
-      - V23T401,
-      - V23T402T,
-      - V23T402T,
-      - V23T404T,
-      - V22T405,
-      - V22T406,
-      - V22T401,
-      - V22T402T,
-      - V22T402T,
-      - V22T404T,
-      - V21T401,
-      - TS Shara,
-      - V13T425,
-      - V.014.00,
-      - V.015.00,
-      - TS Shara,
-      - V17T376,
-      - V17T375,
-      - V17T374,
-      - V17T373
+  log_level: list(Trace|Debug|Information|Warning|Error|Critical)?   
+  notifier_hours: null
+  notifier_minutes: null
+  notifier_seconds: 30
+  notifier_milliseconds: null
+  notifier_endpoint: null
+  serial_new_line_indicator: "\r"
+  serial_read_timeout_days: null
+  serial_read_timeout_hours: null
+  serial_read_timeout_minutes: null
+  serial_read_timeout_seconds: null
+  serial_read_timeout_milliseconds: 100
+  serial_commands_get_device_information_command: "I\r"
+  serial_commands_get_device_information_delay_days: null
+  serial_commands_get_device_information_delay_hours: null
+  serial_commands_get_device_information_delay_minutes: null
+  serial_commands_get_device_information_delay_seconds: null
+  serial_commands_get_device_information_delay_milliseconds: 1000
+  serial_commands_get_device_status_command: "Q1\r"
+  serial_commands_get_device_status_delay_days: null
+  serial_commands_get_device_status_delay_hours: null
+  serial_commands_get_device_status_delay_minutes: null
+  serial_commands_get_device_status_delay_seconds: null
+  serial_commands_get_device_status_delay_milliseconds: 1000
+  serial_valid_prefixes:
+    - "?TS SHARA"
+    - "TS SHARA"
+    - "S SHARA"
+    - "#TS SHAR"
+    - "V23T405"
+    - "V23T406"
+    - "V23T401"
+    - "V23T402T"
+    - "V23T402T"
+    - "V23T404T"
+    - "V22T405"
+    - "V22T406"
+    - "V22T401"
+    - "V22T402T"
+    - "V22T402T"
+    - "V22T404T"
+    - "V21T401"
+    - "TS Shara"
+    - "V13T425"
+    - "V.014.00"
+    - "V.015.00"
+    - "TS Shara"
+    - "V17T376"
+    - "V17T375"
+    - "V17T374"
+    - "V17T373"
 schema:
   log_level: list(Trace|Debug|Information|Warning|Error|Critical)?
-  notifier:
-    internal: 
-      days: int?
-      hours: int?
-      minutes: int?
-      seconds: int?
-      milliseconds: int?
-    endpoint: str?
-  serial:
-    new_line_indicator: str?
-    read_timeout: 
-      days: int?
-      hours: int?
-      minutes: int?
-      seconds: int?
-      milliseconds: int?
-    commands:
-      get_device_information: 
-        command: str
-        delay: 
-          days: int?
-          hours: int?
-          minutes: int?
-          seconds: int?
-          milliseconds: int?
-      get_device_status: 
-        command: str
-        delay: 
-          days: int?
-          hours: int?
-          minutes: int?
-          seconds: int?
-          milliseconds: int?
-    valid_prefixes:
-      - str
+  notifier_hours: int?
+  notifier_minutes: int?
+  notifier_seconds: int?
+  notifier_milliseconds: int?
+  notifier_endpoint: str?
+  serial_new_line_indicator: str
+  serial_read_timeout_days: int?
+  serial_read_timeout_hours: int?
+  serial_read_timeout_minutes: int?
+  serial_read_timeout_seconds: int?
+  serial_read_timeout_milliseconds: int?
+  serial_commands_get_device_information_command: str
+  serial_commands_get_device_information_delay_days: int?
+  serial_commands_get_device_information_delay_hours: int?
+  serial_commands_get_device_information_delay_minutes: int?
+  serial_commands_get_device_information_delay_seconds: int?
+  serial_commands_get_device_information_delay_milliseconds: int?
+  serial_commands_get_device_status_command: str
+  serial_commands_get_device_status_delay_days: int?
+  serial_commands_get_device_status_delay_hours: int?
+  serial_commands_get_device_status_delay_minutes: int?
+  serial_commands_get_device_status_delay_seconds: int?
+  serial_commands_get_device_status_delay_milliseconds: int?
+  serial_valid_prefixes:
+  - str
