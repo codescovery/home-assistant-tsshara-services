@@ -1,7 +1,7 @@
 ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.3.2 
 FROM ${BUILD_FROM} AS base-addon
-RUN apk add --no-cache wget curl && \
-    curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0
+RUN apk add --no-cache wget curl openssl ncurses-libs libstdc++
+RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
@@ -23,13 +23,18 @@ RUN dotnet publish TsShara.Services.Application.csproj -c "$BUILD_CONFIGURATION"
 
 # hadolint ignore=DL3006
 FROM base-addon AS final
-ENV ASPNETCORE_URLS=http://+:80;http://+:443
+ENV ASPNETCORE_URLS=http://+:8099
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV PATH=$PATH:$HOME/.dotnet
+ENV DOTNET_ROOT=$HOME/.dotnet
+ENV LOGGING__LOGLEVEL__DEFAULT=Information
+ENV LOGGING__LOGLEVEL__MICROSOFT=Warning
+ENV CONFIG_PATH=/data/options.json
 WORKDIR /app
 COPY run.sh  .
-RUN chmod a+x run.sh
-EXPOSE 80
-EXPOSE 443
+COPY entrypoint.sh  .
+RUN chmod a+x entrypoint.sh
+EXPOSE 8099
 COPY --from=publish /app/publish .
-CMD ["/app/run.sh"]
+ENTRYPOINT  ["/app/entrypoint.sh"]

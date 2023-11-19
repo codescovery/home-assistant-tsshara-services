@@ -9,9 +9,11 @@ startup: services
 ingress: true
 ingress_port: 0
 ingress_stream: true
+ingress_entry: /swagger
+
 init: false
 panel_icon: mdi:api
-panel_title: Swagger
+panel_title: Ts-Shara No Break Status Api
 homeassistant: 0.92.0b2
 arch:
   - aarch64
@@ -55,29 +57,12 @@ map:
   - ssl:rw
 journald: true
 options:
-  log_level: list(Trace|Debug|Information|Warning|Error|Critical)?   
-  notifier_hours: null
-  notifier_minutes: null
-  notifier_seconds: 30
-  notifier_milliseconds: null
-  notifier_endpoint: null
+  log_level: Information  
   serial_new_line_indicator: "\r"
-  serial_read_timeout_days: null
-  serial_read_timeout_hours: null
-  serial_read_timeout_minutes: null
-  serial_read_timeout_seconds: null
   serial_read_timeout_milliseconds: 100
   serial_commands_get_device_information_command: "I\r"
-  serial_commands_get_device_information_delay_days: null
-  serial_commands_get_device_information_delay_hours: null
-  serial_commands_get_device_information_delay_minutes: null
-  serial_commands_get_device_information_delay_seconds: null
   serial_commands_get_device_information_delay_milliseconds: 1000
   serial_commands_get_device_status_command: "Q1\r"
-  serial_commands_get_device_status_delay_days: null
-  serial_commands_get_device_status_delay_hours: null
-  serial_commands_get_device_status_delay_minutes: null
-  serial_commands_get_device_status_delay_seconds: null
   serial_commands_get_device_status_delay_milliseconds: 1000
   serial_valid_prefixes:
     - "?TS SHARA"
