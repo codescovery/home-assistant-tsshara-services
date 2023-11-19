@@ -1,0 +1,76 @@
+configuration:
+  log_level: 
+    name: Log level
+    description: "The log level to use for the logger (default: Information) (options: Trace, Debug, Information, Warning, Error, Critical)"
+  notifier_hours:
+    name: Notifier hours
+    description: "The hours to wait before sending a notification (default: 0)"
+  notifier_minutes: 
+    name: Notifier minutes
+    description: "The minutes to wait before sending a notification (default: 0)"
+  notifier_seconds: 
+    name: Notifier seconds
+    description: "The seconds to wait before sending a notification (default: 0)"
+  notifier_milliseconds: 
+    name: Notifier milliseconds
+    description: "The milliseconds to wait before sending a notification (default: 1000)"
+  notifier_endpoint: 
+    name: Notifier endpoint
+    description: "The endpoint to send notifications to (default: http://localhost:5000/api/notifications)"
+  serial_new_line_indicator: 
+    name: Serial new line indicator
+    description: "The new line indicator to use for the serial port (default: \r)"
+  serial_read_timeout_days: 
+    name: Serial read timeout days
+    description: "The days to wait before timing out a serial read (default: 0)"
+  serial_read_timeout_hours: 
+    name: Serial read timeout hours
+    description: "The hours to wait before timing out a serial read (default: 0)"
+  serial_read_timeout_minutes: 
+    name: Serial read timeout minutes
+    description: "The minutes to wait before timing out a serial read (default: 0)"
+  serial_read_timeout_seconds: 
+    name: Serial read timeout seconds
+    description: "The seconds to wait before timing out a serial read (default: 0)"
+  serial_read_timeout_milliseconds: 
+    name: Serial read timeout milliseconds
+    description: "The milliseconds to wait before timing out a serial read (default: 100)"
+  serial_commands_get_device_information_command: 
+    name: Serial commands get device information command
+    description: "The command to send to the serial port to get device information (default: I\r)"
+  serial_commands_get_device_information_delay_days: 
+    name: Serial commands get device information delay days
+    description: "The days to wait before sending the get device information command (default: 0)"
+  serial_commands_get_device_information_delay_hours: 
+    name: Serial commands get device information delay hours
+    description: "The hours to wait before sending the get device information command (default: 0)"
+  serial_commands_get_device_information_delay_minutes: 
+    name: Serial commands get device information delay minutes
+    description: "The minutes to wait before sending the get device information command (default: 0)"
+  serial_commands_get_device_information_delay_seconds: 
+    name: Serial commands get device information delay seconds
+    description: "The seconds to wait before sending the get device information command (default: 0)"
+  serial_commands_get_device_information_delay_milliseconds: 
+    name: Serial commands get device information delay milliseconds
+    description: "The milliseconds to wait before sending the get device information command (default: 1000)"
+  serial_commands_get_device_status_command: 
+    name: Serial commands get device status command
+    description: "The command to send to the serial port to get device status (default: Q1\r)"
+  serial_commands_get_device_status_delay_days: 
+    name: Serial commands get device status delay days
+    description: "The days to wait before sending the get device status command (default: 0)"
+  serial_commands_get_device_status_delay_hours: 
+    name: Serial commands get device status delay hours
+    description: "The hours to wait before sending the get device status command (default: 0)"
+  serial_commands_get_device_status_delay_minutes: 
+    name: Serial commands get device status delay minutes
+    description: "The minutes to wait before sending the get device status command (default: 0)"
+  serial_commands_get_device_status_delay_seconds: 
+    name: Serial commands get device status delay seconds
+    description: "The seconds to wait before sending the get device status command (default: 0)"
+  serial_commands_get_device_status_delay_milliseconds: 
+    name: Serial commands get device status delay milliseconds
+    description: "The milliseconds to wait before sending the get device status command (default: 1000)"
+  serial_valid_prefixes:
+    name: Serial valid prefixes
+    description: "The valid prefixes to use for the serial port (default: ?TS SHARA, TS SHARA, S SHARA, #TS SHAR, V23T405, V23T406, V23T401, V23T402T, V23T402T, V23T404T, V22T405, V22T406, V22T401, V22T402T, V22T402T, V22T404T, V21T401, TS Shara, V13T425, V.014.00, V.015.00, TS Shara, V17T376, V17T375, V17T374, V17T373)"
