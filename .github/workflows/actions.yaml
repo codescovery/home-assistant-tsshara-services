@@ -17,7 +17,7 @@ jobs:
       DOCKER_REPOSITORY_NAME: 'codescovery/home-assistant/ts-shara'
       DOCKER_REGISTRY: registry.codescovery.com
       DOCKER_USERNAME: ${{ secrets.CODESCOVERY_REGISTRY_USERNAME }}
-      DOCKER_TOKEN: ${{ secrets.CODESCOVERY_REGISTRY_TOKEN }}
+      DOCKER_PASSWORD: ${{ secrets.CODESCOVERY_REGISTRY_PASSWORD }}
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +44,7 @@ jobs:
       with:
         registry: ${{ env.DOCKER_REGISTRY }}
         username: ${{ env.DOCKER_USERNAME }}
-        password: ${{ env.DOCKER_TOKEN }}
+        password: ${{ env.DOCKER_PASSWORD }}
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
