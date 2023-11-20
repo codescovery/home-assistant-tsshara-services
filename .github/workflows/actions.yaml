@@ -11,11 +11,12 @@ on:
       - 'docs/**'
       - 'README.md'
       - 'LICENSE'
-  workflow_dispatch: 
+  workflow_dispatch:
+    inputs: {}
 jobs:
   build:
     env:
-      DOCKER_REPOSITORY_NAME: 'codescovery/home-assistant/ts-shara'
+      DOCKER_REPOSITORY_NAME: 'home-assistant/ts-shara'
       DOCKER_REGISTRY: registry.codescovery.com
       DOCKER_USERNAME: ${{ secrets.CODESCOVERY_REGISTRY_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.CODESCOVERY_REGISTRY_TOKEN }}
