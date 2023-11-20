@@ -29,7 +29,6 @@ jobs:
       uses: docker/metadata-action@v5
       with:
         images: |
-          ${{env.DOCKER_REPOSITORY_NAME}}
           ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_REPOSITORY_NAME }}
         tags: |
           type=ref,event=branch
