@@ -18,7 +18,7 @@ jobs:
       DOCKER_REPOSITORY_NAME: 'codescovery/home-assistant/ts-shara'
       DOCKER_REGISTRY: registry.codescovery.com
       DOCKER_USERNAME: ${{ secrets.CODESCOVERY_REGISTRY_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.CODESCOVERY_REGISTRY_PASSWORD }}
+      DOCKER_PASSWORD: ${{ secrets.CODESCOVERY_REGISTRY_TOKEN }}
     runs-on: ubuntu-latest
 
     steps:
