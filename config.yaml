@@ -97,6 +97,7 @@ schema:
   notifier_seconds: int?
   notifier_milliseconds: int?
   notifier_endpoint: str?
+  serial_portname: str?
   serial_new_line_indicator: str
   serial_read_timeout_days: int?
   serial_read_timeout_hours: int?

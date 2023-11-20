@@ -4,7 +4,7 @@ using TsShara.Services.Domain.Interfaces;
 
 namespace TsShara.Services.Application.ViewModels;
 
-public class TsSharaStatusDataResponseModel:TsSharaStatusResponseModel,ITsSharaInformationData
+public class TsSharaStatusDataResponseModel : TsSharaStatusResponseModel, ITsSharaInformationData
 {
     public TsSharaStatusDataResponseModel(ITsSharaInformationData data, bool isMonitoring, string portName) : base(isMonitoring, portName)
     {
@@ -28,8 +28,8 @@ public class TsSharaStatusDataResponseModel:TsSharaStatusResponseModel,ITsSharaI
         IsCriticalBattery = data.IsCriticalBattery;
         RawMessage = data.RawMessage;
         NormalizedRawMessage = data.NormalizedRawMessage;
-        
-        
+
+
     }
 
     [JsonPropertyName("deviceInfo")]
