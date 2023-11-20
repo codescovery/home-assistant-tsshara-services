@@ -15,7 +15,7 @@ jobs:
   build:
     env:
       DOCKER_REPOSITORY_NAME: 'codescovery/home-assistant/ts-shara'
-      DOCKER_REGISTRY: https://registry.codescovery.com
+      DOCKER_REGISTRY: registry.codescovery.com
       DOCKER_USERNAME: ${{ secrets.CODESCOVERY_REGISTRY_USERNAME }}
       DOCKER_TOKEN: ${{ secrets.CODESCOVERY_REGISTRY_TOKEN }}
     runs-on: ubuntu-latest
