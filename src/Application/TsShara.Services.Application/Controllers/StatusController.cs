@@ -1,6 +1,8 @@
 using Codescovery.Library.Commons.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using TsShara.Services.Application.ViewModels;
+using TsShara.Services.Domain.Configurations;
 using TsShara.Services.Domain.Interfaces;
 
 namespace TsShara.Services.Application.Controllers
@@ -11,11 +13,13 @@ namespace TsShara.Services.Application.Controllers
     {
         private readonly ILogger<StatusController> _logger;
         private readonly ITsSharaStatusFromUsb _serialUsbReader;
+        private readonly IOptions<AppSettings> _settings;
 
-        public StatusController(ILogger<StatusController> logger, ITsSharaStatusFromUsb serialUsbReader)
+        public StatusController(ILogger<StatusController> logger, ITsSharaStatusFromUsb serialUsbReader, IOptions<AppSettings> settings)
         {
             _logger = logger;
             _serialUsbReader = serialUsbReader;
+            _settings = settings;
         }
 
         [HttpGet]
@@ -23,8 +27,7 @@ namespace TsShara.Services.Application.Controllers
         {
             try
             {
-                var data = string.IsNullOrWhiteSpace(port)? await _serialUsbReader.GetAsync(cancellationToken)
-                        : await _serialUsbReader.GetAsync(port, cancellationToken);
+                var data = await GetAsync(port, cancellationToken);
                 if (data == null) return NoContent();
                 if (data.IsType<ITsSharaInformationError>())
                     return await HandleErrorAsync(data, cancellationToken);
@@ -38,7 +41,14 @@ namespace TsShara.Services.Application.Controllers
                 return BadRequest(ex);
             }
         }
-        
+
+        private async Task<ITsSharaInformationResult?> GetAsync(string? port, CancellationToken cancellationToken)
+        {
+            if (!string.IsNullOrWhiteSpace(port)) return await _serialUsbReader.GetAsync(port, cancellationToken);
+            if (!string.IsNullOrWhiteSpace(_settings.Value.TsShara.SerialPortName)) return await _serialUsbReader.GetAsync(_settings.Value.TsShara.SerialPortName, cancellationToken);
+            return await _serialUsbReader.GetAsync(cancellationToken);
+        }
+
 
         private async Task<IActionResult> HandleErrorAsync(ITsSharaInformationResult data, CancellationToken cancellationToken)
         {

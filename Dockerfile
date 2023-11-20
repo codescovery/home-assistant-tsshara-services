@@ -11,7 +11,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY src/ .
-WORKDIR /src/TsShara.Services/Application/TsShara.Services.Application
+WORKDIR /src/Application/TsShara.Services.Application
 RUN dotnet restore TsShara.Services.Application.csproj
 RUN dotnet build TsShara.Services.Application.csproj -c "$BUILD_CONFIGURATION"  -o /app/build
 

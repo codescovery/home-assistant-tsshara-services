@@ -17,6 +17,9 @@ configuration:
   notifier_endpoint: 
     name: Notifier endpoint
     description: "The endpoint to send notifications to (default: http://localhost:5000/api/notifications)"
+  serial_portname:
+    name: Serial portname
+    description: "The portname to use for the serial port, if not specified, the system will attempt to auto-detect the portname"
   serial_new_line_indicator: 
     name: Serial new line indicator
     description: "The new line indicator to use for the serial port (default: \r)"
