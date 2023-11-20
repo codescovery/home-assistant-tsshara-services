@@ -13,11 +13,11 @@ WORKDIR /src
 COPY src/ .
 WORKDIR /src/Application/TsShara.Services.Application
 RUN dotnet restore TsShara.Services.Application.csproj
-RUN dotnet build TsShara.Services.Application.csproj -c "$BUILD_CONFIGURATION"  -o /app/build
+RUN dotnet build TsShara.Services.Application.csproj -c $BUILD_CONFIGURATION  -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish TsShara.Services.Application.csproj -c "$BUILD_CONFIGURATION" -o /app/publish /p:UseAppHost=false
+RUN dotnet publish TsShara.Services.Application.csproj -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 
 
