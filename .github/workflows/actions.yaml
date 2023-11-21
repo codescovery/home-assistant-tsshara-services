@@ -17,7 +17,7 @@ jobs:
   build:
     env:
       DOCKER_REPOSITORY_NAME: 'home-assistant/ts-shara'
-      DOCKER_REGISTRY: ${{ secrets.CODESCOVERY_REGISTRY }}
+      DOCKER_REGISTRY: registry.codescovery.com
       DOCKER_USERNAME: ${{ secrets.CODESCOVERY_REGISTRY_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.CODESCOVERY_REGISTRY_TOKEN }}
     runs-on: ubuntu-latest
@@ -46,11 +46,13 @@ jobs:
         registry: ${{ env.DOCKER_REGISTRY }}
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ env.DOCKER_PASSWORD }}
-    - name: Build and push
+    - name: Build
       uses: docker/build-push-action@v5
       with:
         platforms: linux/amd64,linux/arm64
         push: ${{ github.event_name != 'pull_request' }}
-        tags: |
-          ${{ steps.meta.outputs.tags }}
+    - name: push 
+      if: github.event_name != 'pull_request' 
+      run: |
+        docker push --all-tags ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_REPOSITORY_NAME }}
          
