@@ -54,5 +54,6 @@ jobs:
     - name: push 
       if: github.event_name != 'pull_request' 
       run: |
+        docker image ls
         docker push --all-tags ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_REPOSITORY_NAME }}
          
