@@ -51,6 +51,7 @@ jobs:
       with:
         platforms: linux/amd64,linux/arm64
         push: false
+        output: type=image,push=false
         tags: |
           ${{ steps.meta.outputs.tags }}
     - name: push 
