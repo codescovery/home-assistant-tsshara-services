@@ -50,9 +50,9 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         platforms: linux/amd64,linux/arm64
-        push: false
-        outputs: type=image,push=false
-        tags: |
+        push: github.event_name != 'pull_request' 
+        outputs: type=image,oci-mediatypes=true,compression=zstd,compression-level=3,force-compression=true
+        tags: | 
           ${{ steps.meta.outputs.tags }}
     - name: push 
       if: github.event_name != 'pull_request' 
