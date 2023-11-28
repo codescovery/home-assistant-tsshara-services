@@ -9,7 +9,7 @@ set_environment_variable() {
     CONFIG_PATH=/data/options.json
     local env_variable_name="$1"
     local config_name="$2"
-    local default_value="$3"
+    local default_value="${3:-}"
     local config_value="$(bashio::config "$config_name")"
     # print config value to log but not to stdout
     echo "$config_name is set to $config_value" >&2
