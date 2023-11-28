@@ -2,6 +2,9 @@ configuration:
   log_level: 
     name: Log level
     description: "The log level to use for the logger (default: Information) (options: Trace, Debug, Information, Warning, Error, Critical)"
+  aspnetcore_urls:
+    name: ASP.NET Core URLs
+    description: "The URLs to use for the ASP.NET Core server (default: http://+:8099)"
   notifier_hours:
     name: Notifier hours
     description: "The hours to wait before sending a notification (default: 0)"

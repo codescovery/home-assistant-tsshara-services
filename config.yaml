@@ -1,6 +1,6 @@
 ---
 name: Ts-Shara No Break Status Api
-version: 0.0.5
+version: 0.0.6
 slug: codescovery-ts-shara
 description: An .Net 8 API for Ts-Shara No Break Status
 url: https://github.com/dev-vinicius-andrade
@@ -15,7 +15,7 @@ init: false
 panel_icon: mdi:api
 panel_title: Ts-Shara No Break Status Api
 homeassistant: 0.92.0b2
-webui: http://[HOST]:[PORT:8099]/swagger/index.html
+webui: http://[HOST]:8099/swagger/index.html
 arch:
   - aarch64
   - amd64
@@ -57,6 +57,7 @@ privileged:
 journald: true
 options:
   log_level: Information
+  aspnetcore_urls: http://+:8099
   serial_new_line_indicator: "\r"
   serial_read_timeout_milliseconds: 100
   serial_commands_get_device_information_command: "I\r"
@@ -92,6 +93,7 @@ options:
     - "V17T373"
 schema:
   log_level: list(Trace|Debug|Information|Warning|Error|Critical)?
+  aspnetcore_urls: str?
   notifier_hours: int?
   notifier_minutes: int?
   notifier_seconds: int?
