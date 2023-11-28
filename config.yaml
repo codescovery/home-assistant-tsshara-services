@@ -1,6 +1,6 @@
 ---
 name: Ts-Shara No Break Status Api
-version: 0.0.1
+version: 0.0.2
 slug: codescovery-ts-shara
 description: An .Net 8 API for Ts-Shara No Break Status
 url: https://github.com/dev-vinicius-andrade
@@ -8,10 +8,9 @@ image: registry.codescovery.com/home-assistant/ts-shara
 codenotary: contact@codescovery.com
 startup: services
 ingress: true
-ingress_port: 0
+ingress_port: 8099
 ingress_stream: true
-ingress_entry: /swagger
-
+ingress_entry: /swagger/index.html
 init: false
 panel_icon: mdi:api
 panel_title: Ts-Shara No Break Status Api
@@ -38,12 +37,6 @@ audio: true
 apparmor: false
 host_dbus: true
 docker_api: true
-privileged:
-  - NET_ADMIN
-  - SYS_ADMIN
-  - SYS_RAWIO
-  - SYS_TIME
-  - SYS_NICE
 devices:
   - /dev/mem
 map:
@@ -54,9 +47,15 @@ map:
   - media:rw
   - share:rw
   - ssl:rw
+privileged:
+  - NET_ADMIN
+  - SYS_ADMIN
+  - SYS_RAWIO
+  - SYS_TIME
+  - SYS_NICE
 journald: true
 options:
-  log_level: Information  
+  log_level: Information
   serial_new_line_indicator: "\r"
   serial_read_timeout_milliseconds: 100
   serial_commands_get_device_information_command: "I\r"

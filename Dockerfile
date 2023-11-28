@@ -1,6 +1,6 @@
 ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.3.2 
 FROM ${BUILD_FROM} AS base-addon
-RUN apk add --no-cache wget curl openssl ncurses-libs libstdc++
+RUN apk add --no-cache wget curl openssl ncurses-libs libstdc++  libc6-compat
 RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
