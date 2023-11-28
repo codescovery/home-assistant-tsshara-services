@@ -15,7 +15,7 @@ init: false
 panel_icon: mdi:api
 panel_title: Ts-Shara No Break Status Api
 homeassistant: 0.92.0b2
-webui: http://[HOST]:8099/swagger/index.html
+webui: http://[HOST]:[PORT:8099]/swagger/index.html
 arch:
   - aarch64
   - amd64
