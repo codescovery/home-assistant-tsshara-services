@@ -9,18 +9,20 @@ set_environment_variable() {
     CONFIG_PATH=/data/options.json
     local env_variable_name="$1"
     local config_name="$2"
-    local default_value="${3:-}"
+    
     local config_value="$(bashio::config "$config_name")"
     # print config value to log but not to stdout
     echo "$config_name is set to $config_value" >&2
 
     
-    if [ -n "$config_value" ]; then
+    if [ -n "$config_value" ] && [ "$config_value" != "null" ]; then
         # Variable is defined and not empty
         export "$env_variable_name"="$config_value"
         echo "$env_variable_name is set to $config_value"
     else
-        if [ -n "$default_value" ]; then
+        if [ $# -ge 3 ] && [ -n "$3" ] && [ "$3" != "null" ]; then
+            echo "Using default value for $config_name" >&2
+            local default_value="$3"
             # Variable is not defined, use default value
             export "$env_variable_name"="$default_value"
             echo "$env_variable_name is set to $default_value"
