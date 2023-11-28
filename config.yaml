@@ -1,6 +1,6 @@
 ---
 name: Ts-Shara No Break Status Api
-version: 0.0.2
+version: 0.0.3
 slug: codescovery-ts-shara
 description: An .Net 8 API for Ts-Shara No Break Status
 url: https://github.com/dev-vinicius-andrade
@@ -10,7 +10,7 @@ startup: services
 ingress: true
 ingress_port: 8099
 ingress_stream: true
-ingress_entry: /swagger/index.html
+ingress_entry: swagger/index.html
 init: false
 panel_icon: mdi:api
 panel_title: Ts-Shara No Break Status Api
