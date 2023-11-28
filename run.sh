@@ -3,12 +3,12 @@ export PATH=$PATH:$HOME/.dotnet
 export DOTNET_ROOT=$HOME/.dotnet
 export LOGGING__LOGLEVEL__DEFAULT=Information
 export LOGGING__LOGLEVEL__MICROSOFT=Warning
-export CONFIG_PATH=/data/options.json
+
 
 set_environment_variable() {
+    CONFIG_PATH=/data/options.json
     local env_variable_name="$1"
     local config_name="$2"
-
     local config_value="$(bashio::config "$config_name")"
     # print config value to log but not to stdout
     echo "$config_name is set to $config_value" >&2
