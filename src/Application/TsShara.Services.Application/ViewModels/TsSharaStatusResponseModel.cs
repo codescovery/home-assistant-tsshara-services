@@ -6,7 +6,7 @@ public class TsSharaStatusResponseModel
 {
     
 
-    public TsSharaStatusResponseModel(bool isMonitoring, string portName)
+    public TsSharaStatusResponseModel(bool isMonitoring, string? portName)
     {
         IsMonitoring = isMonitoring;
         PortName = portName;
@@ -14,5 +14,5 @@ public class TsSharaStatusResponseModel
     [JsonPropertyName("isMonitoring")]
     public bool IsMonitoring { get; }
     [JsonPropertyName("portName")]
-    public string PortName { get; }
+    public string? PortName { get; }
 }

@@ -17,7 +17,6 @@ public class TsSharaStatusFromUsb : ITsSharaStatusFromUsb
     private readonly IAvailableSerialUsbPorts _avaliableSerialUsbPorts;
     private readonly ITsSharaInformationDataService _tsSharaInformationDataService;
     private readonly ITimeSpanService _timeSpanService;
-
     public TsSharaStatusFromUsb(IOptions<AppSettings> settings,
         ILogger<TsSharaStatusFromUsb> logger,
         IAvailableSerialUsbPorts avaliableSerialUsbPorts,

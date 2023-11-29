@@ -41,6 +41,7 @@ namespace TsShara.Services.Application.Controllers
                 return BadRequest(ex);
             }
         }
+        
 
         private async Task<ITsSharaInformationResult?> GetAsync(string? port, CancellationToken cancellationToken)
         {
@@ -53,11 +54,9 @@ namespace TsShara.Services.Application.Controllers
         private async Task<IActionResult> HandleErrorAsync(ITsSharaInformationResult data, CancellationToken cancellationToken)
         {
             var error = data.AsError();
-            return await Task.FromResult(error == null
-                ? Problem("Unhandled error", statusCode: StatusCodes.Status500InternalServerError)
-                : Problem(error.Exception.GetFullMessage(), error.Exception.Source,
-                    StatusCodes.Status500InternalServerError,
-                    error.Exception.Message, error.Exception.GetType().FullName));
+            return await Task.FromResult(
+                StatusCode(StatusCodes.Status500InternalServerError, new TsSharaStatusErrorResponseModel(error)));
+
         }
     }
 }

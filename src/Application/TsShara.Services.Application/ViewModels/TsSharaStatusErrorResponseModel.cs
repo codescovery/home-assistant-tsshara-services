@@ -6,10 +6,13 @@ namespace TsShara.Services.Application.ViewModels;
 public class TsSharaStatusErrorResponseModel:TsSharaStatusResponseModel
 {
     [JsonPropertyName("error")]
-    public ITsSharaInformationError Error { get; }
-
-    public TsSharaStatusErrorResponseModel(ITsSharaInformationError error, bool isMonitoring, string portName) : base(isMonitoring, portName)
+    public ITsSharaInformationError? Error { get; }
+    
+    public TsSharaStatusErrorResponseModel( bool isMonitoring, ITsSharaInformationError? error=null) : base(isMonitoring, error?.PortName)
     {
         Error = error;
+    }
+    public TsSharaStatusErrorResponseModel(ITsSharaInformationError? error) : this(false, error)
+    {
     }
 }
