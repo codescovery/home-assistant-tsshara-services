@@ -33,7 +33,6 @@ builder.WebHost
         services.AddCors(c => c
             .AddPolicy(AllowAllCorsPolicyName, p =>
                 p.SetIsOriginAllowed(s => true)
-                    .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
