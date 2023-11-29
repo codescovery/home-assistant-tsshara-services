@@ -93,6 +93,7 @@ options:
     - "V17T373"
 schema:
   log_level: list(Trace|Debug|Information|Warning|Error|Critical)?
+  swagger_server_configuration: str
   aspnetcore_urls: str?
   notifier_hours: int?
   notifier_minutes: int?

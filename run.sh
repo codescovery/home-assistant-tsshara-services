@@ -34,4 +34,5 @@ set_environment_variable() {
 }
 set_environment_variable "AppSettings__TsShara__SerialPortName" "serial_portname"
 set_environment_variable "ASPNETCORE_URLS" "aspnetcore_urls" "http://+:8099"
+set_environment_variable "Api__Endpoint" "swagger_server_configuration"
 dotnet TsShara.Services.Application.dll

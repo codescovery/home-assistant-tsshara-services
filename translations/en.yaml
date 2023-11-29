@@ -2,6 +2,9 @@ configuration:
   log_level: 
     name: Log level
     description: "The log level to use for the logger (default: Information) (options: Trace, Debug, Information, Warning, Error, Critical)"
+  swagger_server_configuration:
+    name: Swagger server configuration
+    description: "The configuration to use for the swagger server. If you are not using under a reverse proxy, you should set this to <http|https>://YOUR_HOME_ASSISTANT_IP_OR_HOST:8099/"
   aspnetcore_urls:
     name: ASP.NET Core URLs
     description: "The URLs to use for the ASP.NET Core server (default: http://+:8099)"
