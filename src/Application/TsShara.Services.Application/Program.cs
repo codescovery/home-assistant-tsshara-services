@@ -1,5 +1,6 @@
 using System.Reflection;
 using Codescovery.Library.DependencyInjection.Extensions;
+using Microsoft.OpenApi.Models;
 using TsShara.Services.Domain.Configurations;
 using TsShara.Services.Domain.Extensions.DependencyInjection;
 using TsShara.Services.Domain.Interfaces;
@@ -30,7 +31,19 @@ builder.WebHost
     if (!enabledFeaturesService.IsFeatureApiEnabled) return;
     services.AddControllers();
     services.AddEndpointsApiExplorer();
-    services.AddSwaggerGen();
+    services.AddSwaggerGen(c=>
+    {
+        var url = $"{context.Configuration["Api:Endpoint"]}";
+        if(string.IsNullOrWhiteSpace(url)) return;
+        c.SwaggerGeneratorOptions.Servers = new List<OpenApiServer>
+        {
+            new()
+            {
+                Url = url,
+                Description = "Api"
+            }
+        };
+    });
 });
 var app = builder.Build();
 var enabledFeaturesService = app.Services.GetRequiredService<IEnabledFeaturesService>();
